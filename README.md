@@ -15,8 +15,8 @@ These accounts are usually operated by individuals manually downloading and reup
 This app eliminates the need for third-party apps and creates an automated platform for this type of SnapChat user.
 
 #How It Works
-autosnapper/autosnapper.py is responsible for downloading all recieved Snaps and storing metadata in MongoDB
-snap_approver/app.js is a webserver responsible for a one-page Web App that displays the recently received Snaps
+- autosnapper/autosnapper.py is responsible for downloading all recieved Snaps and storing metadata in MongoDB
+- snap_approver/app.js is a webserver responsible for a one-page Web App that displays the recently received Snaps
+- The Web App displays the Snap Image or Video and gives the account admin the option to approve or veto the Snap.  Once a decision is made the Server updates the Snaps data in Mongo.  If the Snap is approved the autosnapper will then post it to the user's story!
 
-The Web App displays the Snap Image or Video and gives the user the option to approve or veto the Snap.  Once a decision is made the Server updates the Snaps data in Mongo.  If the Snap is approved the autosnapper will then post it to the user's story!
-
+![alt tag](https://raw.github.com/tophep/SnapHack-Framework/master/snap_approver/SnapApprover.png)
