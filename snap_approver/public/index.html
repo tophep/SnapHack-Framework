@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <!-- Basic Page Needs
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta charset="utf-8">
+  <title>Snap Approver</title>
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <!-- Mobile Specific Metas
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- FONT
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
+
+  <!-- CSS
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="stylesheet" href="stylesheets/normalize.css">
+  <link rel="stylesheet" href="stylesheets/skeleton.css">
+
+  <!-- Favicon
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="icon" type="image/png" href="images/favicon.png">
+
+</head>
+<body class="body">
+
+  <!-- Primary Page Layout
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <div class="container">
+
+    <!-- columns should be the immediate child of a .row -->
+    <div class="row" id="main">
+      <div class="four columns offset-by-four columns">
+        <img class="image" alt="PHOTO" id="image-tag"></img>
+        <video class="video" id="video-tag" loop controls>
+          <source type="video/mp4">
+        </video>
+        <button class="button-primary" id="yes-btn">Y</button>
+        <button class="button-primary" id="no-btn">N</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- End Document
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+
+  <script src="javascripts/jquery-1.11.2.js"></script>
+  <script type="text/javascript">
+
+  var snapID = null;
+  var snapType = null;
+
+  var changeSnapSource = function(id, media_type) {
+    if(id){
+      if (media_type == "image") {
+        $("#image-tag").attr("src", "/snaps/" + id);
+        $("#image-tag").css("display", "inline"); 
+        $("#video-tag").css("display", "none");  
+      }
+      else if(media_type == "video") {
+        $("#video-tag source").attr("src", "/snaps/" + id);
+        $("#video-tag").load();
+        $("#video-tag").get(0).play();
+        $("#video-tag").css("display", "inline"); 
+        $("#image-tag").css("display", "none"); 
+      }
+      $("#main").css("visibility", "visible");
+    }
+    else {
+      $("#main").css("visibility", "hidden");
+    }
+  };
+
+  var popSnapID = function() {
+    $.get("/pop", function(data) {
+      snapType = data.substring(0, 5);
+      snapID = data.substring(5);
+      changeSnapSource(snapID, snapType);
+    });
+  };
+
+  var approveSnap = function(approved) {
+    $.post("/snaps/" + snapID + "/" + approved, function(data) {
+      popSnapID();
+    });
+  };
+
+  $(document).ready(function(){
+    popSnapID();
+    
+    $("#yes-btn").click(function(){
+      approveSnap(true);
+    });
+    
+    $("#no-btn").click(function(){
+      approveSnap(false);
+    });   
+  });
+
+  </script>
+</body>
+</html>
+
