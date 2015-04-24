@@ -20,3 +20,16 @@ This app eliminates the need for third-party apps and creates an automated platf
 - The Web App displays the Snap Image or Video and gives the account admin the option to approve or veto the Snap.  Once a decision is made the Server updates the Snaps data in Mongo.  If the Snap is approved the autosnapper will then post it to the user's story!
 
 ![alt tag](https://raw.github.com/tophep/SnapHack-Framework/master/snap_approver/SnapApprover.png)
+
+
+#How To Run It
+
+- Install python, python-dev, python-pip, node, npm, and MongoDB
+  sudo pip install Pillow
+  sudo pip install pycrypto
+  sudo pip install pymongo
+  sudo mongod
+  sudo python autosnapper/autosnapper.py
+  cd snap_approver
+  sudo npm install
+  sudo node app.js
