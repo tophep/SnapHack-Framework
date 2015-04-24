@@ -25,11 +25,11 @@ This app eliminates the need for third-party apps and creates an automated platf
 #How To Run It
 
 - Install python, python-dev, python-pip, node, npm, and MongoDB
-  sudo pip install Pillow
-  sudo pip install pycrypto
-  sudo pip install pymongo
-  sudo mongod
-  sudo python autosnapper/autosnapper.py
-  cd snap_approver
-  sudo npm install
-  sudo node app.js
+- sudo pip install Pillow
+- sudo pip install pycrypto
+- sudo pip install pymongo
+- sudo mongod
+- sudo python autosnapper/autosnapper.py
+- cd snap_approver
+- sudo npm install
+- sudo node app.js
